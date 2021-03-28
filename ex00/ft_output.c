@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mderuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/28 11:28:34 by mderuell          #+#    #+#             */
-/*   Updated: 2021/03/28 17:03:48 by mderuell         ###   ########.fr       */
+/*   Created: 2021/03/28 13:13:34 by mderuell          #+#    #+#             */
+/*   Updated: 2021/03/28 14:34:00 by mderuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
-
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
-void	ft_putnbr(int nb);
-void	ft_output(char *arg, char *tab);
-
-int	main(int argc, char **argv)
+void	ft_putchar(char c)
 {
-	(void)	argc;
+	write(1, &c, 1);
+}
+void	ft_output(char *arg, char *tab)
+{
+	unsigned int i;
+	
+	i = 0 ;
 
-	int fd;
-	int rr;
-	char tab[692];
+	while (tab[i])
+	{
+		if ((arg[i] == tab[i]) && (tab[i] >= '0' && tab[i] <= '9'))
+		{
+			while (tab[i] != '\n')
+			{
+				ft_putchar(tab[i]);
+				i++;
+			}
+		}
+		i++;			
 
-
-	fd = open("numbers.dict", O_RDONLY);
-	rr = read(fd, tab, 692);
-	tab[rr] = '\n';
-	ft_putstr(tab);
-	ft_putnbr(fd);
-	ft_putstr("\n");
-	rr = close(fd);
-	return 0;	
+	}
 }
